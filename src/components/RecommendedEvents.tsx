@@ -31,6 +31,20 @@ const RecommendedEvents = () => {
       time: '22:00',
       location: 'Providencia',
       category: 'Fiesta'
+    },
+    {
+      id: 5,
+      name: 'Mercado Gastronómico',
+      time: '12:00',
+      location: 'Ñuñoa',
+      category: 'Gastronomía'
+    },
+    {
+      id: 6,
+      name: 'Parque Bicentenario',
+      time: '10:00',
+      location: 'Vitacura',
+      category: 'Aire libre'
     }
   ];
 
@@ -41,9 +55,9 @@ const RecommendedEvents = () => {
           ¿Qué hacer hoy?
         </h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {todayEvents.map(event => (
-            <EventCard key={event.id} event={event} />
+            <EventCard key={event.id} event={event} compact={true} />
           ))}
         </div>
       </div>

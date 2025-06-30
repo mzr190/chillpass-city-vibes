@@ -1,6 +1,5 @@
 
-import React, { useState } from 'react';
-import { Filter } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 interface FilterSectionProps {
   onFilterChange: (filters: FilterState) => void;
@@ -9,43 +8,34 @@ interface FilterSectionProps {
 interface FilterState {
   date: string;
   timeOfDay: 'dia' | 'noche' | '';
-  category: string;
-  style: string[];
+  style: string;
 }
 
 const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
   const [filters, setFilters] = useState<FilterState>({
-    date: '',
+    date: new Date().toISOString().split('T')[0], // Hoy por defecto
     timeOfDay: '',
-    category: '',
-    style: []
+    style: ''
   });
 
   const updateFilter = (key: keyof FilterState, value: any) => {
     const newFilters = { ...filters, [key]: value };
+    // Si cambia el tipo de día, resetear el estilo
+    if (key === 'timeOfDay') {
+      newFilters.style = '';
+    }
     setFilters(newFilters);
     onFilterChange(newFilters);
   };
 
-  const toggleStyle = (style: string) => {
-    const newStyles = filters.style.includes(style)
-      ? filters.style.filter(s => s !== style)
-      : [...filters.style, style];
-    updateFilter('style', newStyles);
-  };
-
-  const nightCategories = ['cultura', 'fiesta', 'restaurante'];
-  const dayCategories = ['comer', 'aire libre', 'cultura'];
-  const styles = ['Social', 'Gastronomía', 'Techno', 'Cultural', 'Urbano', 'Aire libre'];
+  const dayStyles = ['Aire libre', 'Gastronomía', 'Cultura'];
+  const nightStyles = ['Gastronomía', 'Fiesta', 'Cultura'];
+  const availableStyles = filters.timeOfDay === 'dia' ? dayStyles : 
+                         filters.timeOfDay === 'noche' ? nightStyles : [];
 
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6 mx-4 -mt-8 relative z-10 max-w-6xl mx-auto">
-      <div className="flex items-center mb-6">
-        <Filter className="text-blue-600 mr-2" size={20} />
-        <h3 className="text-lg font-semibold text-gray-900">Personaliza tu búsqueda</h3>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div className="bg-white shadow-lg rounded-2xl p-6 mx-4 -mt-8 relative z-10 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Fecha */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Fecha</label>
@@ -57,9 +47,9 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
           />
         </div>
 
-        {/* Día o Noche */}
+        {/* Tipo (Día/Noche) */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Momento</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Tipo</label>
           <select
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             value={filters.timeOfDay}
@@ -71,52 +61,22 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
           </select>
         </div>
 
-        {/* Categoría (depende de día/noche) */}
-        {filters.timeOfDay && (
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Categoría</label>
-            <select
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              value={filters.category}
-              onChange={(e) => updateFilter('category', e.target.value)}
-            >
-              <option value="">Seleccionar</option>
-              {(filters.timeOfDay === 'noche' ? nightCategories : dayCategories).map(cat => (
-                <option key={cat} value={cat}>
-                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        {/* Estilos */}
-        <div className="md:col-span-1">
+        {/* Estilo (condicionado) */}
+        <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Estilo</label>
-          <div className="relative">
-            <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none">
-              <option>Seleccionar estilos</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Estilos como chips */}
-      <div className="mt-4">
-        <div className="flex flex-wrap gap-2">
-          {styles.map(style => (
-            <button
-              key={style}
-              onClick={() => toggleStyle(style)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                filters.style.includes(style)
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              {style}
-            </button>
-          ))}
+          <select
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            value={filters.style}
+            onChange={(e) => updateFilter('style', e.target.value)}
+            disabled={!filters.timeOfDay}
+          >
+            <option value="">Seleccionar estilo</option>
+            {availableStyles.map(style => (
+              <option key={style} value={style}>
+                {style}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </div>
