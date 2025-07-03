@@ -16,55 +16,93 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event, featured = false, compact = false }) => {
+  // Imágenes por categoría para las tarjetas compactas
+  const getCategoryImage = (category: string) => {
+    const images = {
+      'Música': 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      'Gastronomía': 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      'Cultura': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      'Fiesta': 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      'Aire libre': 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+    };
+    return images[category as keyof typeof images] || images['Cultura'];
+  };
+
   if (compact) {
     return (
-      <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
-        <div className="h-32 bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
-              <span className="text-white font-bold text-sm">
-                {event.name.charAt(0)}
-              </span>
-            </div>
-            <p className="text-xs text-gray-600">{event.category}</p>
+      <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
+        <div className="relative h-32 overflow-hidden">
+          <img
+            src={event.image || getCategoryImage(event.category)}
+            alt={event.name}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div className="absolute top-2 right-2">
+            <span className="bg-white/90 backdrop-blur-sm text-gray-800 text-xs px-2 py-1 rounded-full font-medium">
+              {event.category}
+            </span>
           </div>
         </div>
         
         <div className="p-4">
-          <h4 className="font-bold text-sm text-gray-900 mb-1 line-clamp-2">{event.name}</h4>
-          <p className="text-gray-600 text-xs mb-1">{event.time}</p>
-          <p className="text-gray-600 text-xs">{event.location}</p>
+          <h4 className="font-bold text-sm text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+            {event.name}
+          </h4>
+          <div className="space-y-1">
+            <p className="text-gray-600 text-xs flex items-center">
+              <span className="w-1 h-1 bg-blue-600 rounded-full mr-2"></span>
+              {event.time}
+            </p>
+            <p className="text-gray-600 text-xs flex items-center">
+              <span className="w-1 h-1 bg-green-600 rounded-full mr-2"></span>
+              {event.location}
+            </p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden ${
+    <div className={`bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group ${
       featured ? 'border-2 border-blue-200' : ''
     }`}>
-      <div className="h-48 bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
-            <span className="text-white font-bold text-xl">
-              {event.name.charAt(0)}
-            </span>
-          </div>
-          <p className="text-sm text-gray-600">{event.category}</p>
+      <div className="relative h-48 overflow-hidden">
+        <img
+          src={event.image || getCategoryImage(event.category)}
+          alt={event.name}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        <div className="absolute top-4 right-4">
+          <span className="bg-white/90 backdrop-blur-sm text-gray-800 text-sm px-3 py-1 rounded-full font-medium">
+            {event.category}
+          </span>
         </div>
       </div>
       
       <div className="p-6">
-        <h4 className="font-bold text-lg text-gray-900 mb-2">{event.name}</h4>
-        <p className="text-gray-600 text-sm mb-1">{event.time}</p>
-        <p className="text-gray-600 text-sm mb-4">{event.location}</p>
+        <h4 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+          {event.name}
+        </h4>
+        <div className="space-y-2 mb-4">
+          <p className="text-gray-600 text-sm flex items-center">
+            <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+            {event.time}
+          </p>
+          <p className="text-gray-600 text-sm flex items-center">
+            <span className="w-2 h-2 bg-green-600 rounded-full mr-3"></span>
+            {event.location}
+          </p>
+        </div>
         
         {event.price && (
-          <p className="text-blue-600 font-semibold mb-4">{event.price}</p>
+          <p className="text-blue-600 font-semibold mb-4 text-lg">{event.price}</p>
         )}
         
         {featured && (
-          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+          <button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
             Comprar entradas
           </button>
         )}
