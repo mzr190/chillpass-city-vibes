@@ -5,7 +5,7 @@ import Hero from '../components/Hero';
 import FilterSection from '../components/FilterSection';
 import MapSection from '../components/MapSection';
 import RecommendedEvents from '../components/RecommendedEvents';
-import FeaturedEvents from '../components/FeaturedEvents';
+import FeaturedCategoriesGrid from '../components/FeaturedCategoriesGrid';
 import Footer from '../components/Footer';
 
 const Index = () => {
@@ -29,7 +29,7 @@ const Index = () => {
       <FilterSection onFilterChange={handleFilterChange} />
       <MapSection filters={filters} />
       <RecommendedEvents />
-      <FeaturedEvents />
+      <FeaturedCategoriesGrid />
       <Footer />
     </div>
   );

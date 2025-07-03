@@ -33,15 +33,18 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
   const availableStyles = filters.timeOfDay === 'dia' ? dayStyles : 
                          filters.timeOfDay === 'noche' ? nightStyles : [];
 
+  const inputClasses = "w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900";
+  const labelClasses = "block text-sm font-semibold text-gray-700 mb-2";
+
   return (
     <div className="bg-white shadow-lg rounded-2xl p-6 mx-4 -mt-8 relative z-10 max-w-4xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Fecha */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Fecha</label>
+          <label className={labelClasses}>Fecha</label>
           <input
             type="date"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={inputClasses}
             value={filters.date}
             onChange={(e) => updateFilter('date', e.target.value)}
           />
@@ -49,9 +52,9 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
 
         {/* Tipo (Día/Noche) */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Tipo</label>
+          <label className={labelClasses}>Tipo</label>
           <select
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={inputClasses}
             value={filters.timeOfDay}
             onChange={(e) => updateFilter('timeOfDay', e.target.value as 'dia' | 'noche' | '')}
           >
@@ -63,9 +66,9 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
 
         {/* Estilo (condicionado) */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Estilo</label>
+          <label className={labelClasses}>Estilo</label>
           <select
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={`${inputClasses} ${!filters.timeOfDay ? 'opacity-50 cursor-not-allowed' : ''}`}
             value={filters.style}
             onChange={(e) => updateFilter('style', e.target.value)}
             disabled={!filters.timeOfDay}

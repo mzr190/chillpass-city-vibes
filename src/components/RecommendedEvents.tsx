@@ -45,6 +45,20 @@ const RecommendedEvents = () => {
       time: '10:00',
       location: 'Vitacura',
       category: 'Aire libre'
+    },
+    {
+      id: 7,
+      name: 'Concierto Indie',
+      time: '21:00',
+      location: 'Teatro Cariola',
+      category: 'Música'
+    },
+    {
+      id: 8,
+      name: 'Food Truck Festival',
+      time: '14:00',
+      location: 'Parque Araucano',
+      category: 'Gastronomía'
     }
   ];
 
@@ -55,7 +69,7 @@ const RecommendedEvents = () => {
           ¿Qué hacer hoy?
         </h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {todayEvents.map(event => (
             <EventCard key={event.id} event={event} compact={true} />
           ))}
