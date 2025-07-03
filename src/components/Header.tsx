@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Filter } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { User, LogIn, UserPlus } from 'lucide-react';
 
 const Header = () => {
   return (
@@ -9,29 +10,46 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
+            <Link to="/" className="text-2xl font-bold text-gray-900 tracking-tight">
               Chill<span className="text-blue-600">pass</span>
-            </h1>
+            </Link>
           </div>
 
           {/* Navigation Menu */}
           <nav className="hidden md:flex space-x-8">
-            <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+            <Link to="/mejores-panoramas" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
               Mejores panoramas
-            </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+            </Link>
+            <Link to="/descuentos-exclusivos" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
               Descuentos Exclusivos
-            </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
-              Destacados gastronomía
-            </a>
+            </Link>
+            <Link to="/fiestas-imperdibles" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+              Fiestas Imperdibles
+            </Link>
           </nav>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button className="text-gray-600 hover:text-blue-600">
-              <Filter size={24} />
-            </button>
+          {/* Auth buttons */}
+          <div className="flex items-center space-x-4">
+            <Link 
+              to="/login" 
+              className="hidden md:flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors font-medium"
+            >
+              <LogIn size={18} />
+              <span>Iniciar sesión</span>
+            </Link>
+            <Link 
+              to="/register" 
+              className="hidden md:flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            >
+              <UserPlus size={18} />
+              <span>Registrarse</span>
+            </Link>
+            <Link 
+              to="/profile" 
+              className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <User size={20} />
+            </Link>
           </div>
         </div>
       </div>
