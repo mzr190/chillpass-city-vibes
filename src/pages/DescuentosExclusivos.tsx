@@ -1,13 +1,9 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
-import FilterSection from '../components/FilterSection';
 import EventCard from '../components/EventCard';
 import Footer from '../components/Footer';
 
 const DescuentosExclusivos = () => {
-  const [filters, setFilters] = useState({});
-
   const descuentosEvents = [
     {
       id: 1,
@@ -47,10 +43,6 @@ const DescuentosExclusivos = () => {
     }
   ];
 
-  const handleFilterChange = (newFilters: any) => {
-    setFilters(newFilters);
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -67,12 +59,7 @@ const DescuentosExclusivos = () => {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="max-w-7xl mx-auto px-4 -mt-8">
-        <FilterSection onFilterChange={handleFilterChange} />
-      </div>
-
-      {/* Events Grid */}
+      {/* Events Grid - Sin filtros */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {descuentosEvents.map((event) => (

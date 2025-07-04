@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import FilterSection from '../components/FilterSection';
@@ -67,12 +66,7 @@ const MejoresPanoramas = () => {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="max-w-7xl mx-auto px-4 -mt-8">
-        <FilterSection onFilterChange={handleFilterChange} />
-      </div>
-
-      {/* Events Grid */}
+      {/* Events Grid - Sin filtros */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {mejoresPanoramasEvents.map((event) => (

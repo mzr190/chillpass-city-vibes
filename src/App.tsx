@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +12,10 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import EventDetail from "./pages/EventDetail";
+import AireLibre from "./pages/AireLibre";
+import Gastronomia from "./pages/Gastronomia";
+import Cultura from "./pages/Cultura";
+import Fiesta from "./pages/Fiesta";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +30,10 @@ const App = () => (
           <Route path="/mejores-panoramas" element={<MejoresPanoramas />} />
           <Route path="/descuentos-exclusivos" element={<DescuentosExclusivos />} />
           <Route path="/fiestas-imperdibles" element={<FiestasImperdibles />} />
+          <Route path="/aire-libre" element={<AireLibre />} />
+          <Route path="/gastronomia" element={<Gastronomia />} />
+          <Route path="/cultura" element={<Cultura />} />
+          <Route path="/fiesta" element={<Fiesta />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
