@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 
@@ -41,18 +42,8 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
           Eventos únicos, experiencias inolvidables y diversión garantizada
         </p>
 
-        {/* Search Section - Claramente diferenciada */}
+        {/* Search Section */}
         <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/20">
-          <div className="mb-6">
-            <h3 className="text-gray-800 text-lg font-semibold mb-2 flex items-center justify-center">
-              <Search className="mr-2" size={20} />
-              Buscar por nombre o palabra clave
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Encuentra eventos específicos escribiendo su nombre o descripción
-            </p>
-          </div>
-          
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <input
@@ -71,13 +62,6 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
               Buscar
             </button>
           </div>
-        </div>
-
-        {/* Note about filters */}
-        <div className="mt-6 text-center">
-          <p className="text-white/80 text-sm">
-            💡 Más abajo encontrarás filtros visuales y un mapa interactivo para explorar por zona
-          </p>
         </div>
       </div>
     </section>

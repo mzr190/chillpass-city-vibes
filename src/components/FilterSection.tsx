@@ -37,49 +37,60 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
   const labelClasses = "block text-sm font-semibold text-gray-700 mb-2";
 
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6 mx-4 -mt-8 relative z-10 max-w-4xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Fecha */}
-        <div>
-          <label className={labelClasses}>Fecha</label>
-          <input
-            type="date"
-            className={inputClasses}
-            value={filters.date}
-            onChange={(e) => updateFilter('date', e.target.value)}
-          />
+    <div className="bg-gray-50 py-8">
+      <div className="max-w-4xl mx-auto px-4">
+        {/* Título de la sección */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">Explorar eventos</h2>
+          <p className="text-gray-600">Filtra por fecha, tipo y estilo para encontrar tu evento perfecto</p>
         </div>
 
-        {/* Tipo (Día/Noche) */}
-        <div>
-          <label className={labelClasses}>Tipo</label>
-          <select
-            className={inputClasses}
-            value={filters.timeOfDay}
-            onChange={(e) => updateFilter('timeOfDay', e.target.value as 'dia' | 'noche' | '')}
-          >
-            <option value="">Seleccionar</option>
-            <option value="dia">Día</option>
-            <option value="noche">Noche</option>
-          </select>
-        </div>
+        {/* Filtros */}
+        <div className="bg-white shadow-lg rounded-2xl p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Fecha */}
+            <div>
+              <label className={labelClasses}>Fecha</label>
+              <input
+                type="date"
+                className={inputClasses}
+                value={filters.date}
+                onChange={(e) => updateFilter('date', e.target.value)}
+              />
+            </div>
 
-        {/* Estilo (condicionado) */}
-        <div>
-          <label className={labelClasses}>Estilo</label>
-          <select
-            className={`${inputClasses} ${!filters.timeOfDay ? 'opacity-50 cursor-not-allowed' : ''}`}
-            value={filters.style}
-            onChange={(e) => updateFilter('style', e.target.value)}
-            disabled={!filters.timeOfDay}
-          >
-            <option value="">Seleccionar estilo</option>
-            {availableStyles.map(style => (
-              <option key={style} value={style}>
-                {style}
-              </option>
-            ))}
-          </select>
+            {/* Tipo (Día/Noche) */}
+            <div>
+              <label className={labelClasses}>Tipo</label>
+              <select
+                className={inputClasses}
+                value={filters.timeOfDay}
+                onChange={(e) => updateFilter('timeOfDay', e.target.value as 'dia' | 'noche' | '')}
+              >
+                <option value="">Seleccionar</option>
+                <option value="dia">Día</option>
+                <option value="noche">Noche</option>
+              </select>
+            </div>
+
+            {/* Estilo (condicionado) */}
+            <div>
+              <label className={labelClasses}>Estilo</label>
+              <select
+                className={`${inputClasses} ${!filters.timeOfDay ? 'opacity-50 cursor-not-allowed' : ''}`}
+                value={filters.style}
+                onChange={(e) => updateFilter('style', e.target.value)}
+                disabled={!filters.timeOfDay}
+              >
+                <option value="">Seleccionar estilo</option>
+                {availableStyles.map(style => (
+                  <option key={style} value={style}>
+                    {style}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>
