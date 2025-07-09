@@ -3,29 +3,11 @@ import React from 'react';
 import Header from '../components/Header';
 import EventCard from '../components/EventCard';
 import { Heart, User, Calendar, MapPin } from 'lucide-react';
+import { useEventFavorites } from '../hooks/useEvents';
 
 const Profile = () => {
-  // Eventos guardados simulados
-  const savedEvents = [
-    {
-      id: 1,
-      name: "Concierto de rock alternativo",
-      time: "Viernes 21:00",
-      location: "Teatro Caupolicán",
-      price: "$20.000",
-      category: "Música",
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      id: 2,
-      name: "Festival gastronómico",
-      time: "Sábado 12:00",
-      location: "Parque Araucano",
-      price: "$15.000",
-      category: "Gastronomía",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
-  ];
+  const { favorites, getFavoriteEvents } = useEventFavorites();
+  const { data: savedEvents = [], isLoading } = getFavoriteEvents();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -48,7 +30,7 @@ const Profile = () => {
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-blue-50 p-4 rounded-lg text-center">
               <Heart className="text-blue-600 mx-auto mb-2" size={24} />
-              <p className="text-2xl font-bold text-blue-600">{savedEvents.length}</p>
+              <p className="text-2xl font-bold text-blue-600">{favorites.length}</p>
               <p className="text-sm text-gray-600">Eventos guardados</p>
             </div>
             <div className="bg-green-50 p-4 rounded-lg text-center">
@@ -71,7 +53,13 @@ const Profile = () => {
             Eventos guardados
           </h2>
           
-          {savedEvents.length > 0 ? (
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="bg-gray-200 rounded-xl h-64 animate-pulse"></div>
+              ))}
+            </div>
+          ) : savedEvents.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {savedEvents.map((event) => (
                 <EventCard key={event.id} event={event} />
