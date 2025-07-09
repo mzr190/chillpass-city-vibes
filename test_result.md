@@ -361,4 +361,8 @@ agent_communication:
   - agent: "main"
     message: "I have implemented a comprehensive Event Management System transforming all hardcoded data into real API-driven functionality. The backend has been tested and is working perfectly. Frontend now includes: real event service layer, React Query hooks for state management, updated components to use real API data, event favorites functionality, real search, and updated pages. All components now fetch real data from the database. Ready for comprehensive frontend testing."
   - agent: "testing"
+    message: "Backend comprehensive testing completed successfully. All 15 API endpoints tested including CRUD operations, search/filtering, error handling. Database operations working correctly. Backend is fully functional and ready for frontend integration."
+  - agent: "main" 
+    message: "User prefers manual frontend testing. Backend is fully tested and working. Frontend implementation is complete with real API integration. User can now manually test all features."
+  - agent: "testing"
     message: "I have completed comprehensive testing of all backend API endpoints. All tests passed successfully. The backend is fully functional with proper data handling, search/filtering capabilities, CRUD operations, and error handling. The API endpoints are correctly implemented according to the requirements. The frontend components are ready for testing next."
