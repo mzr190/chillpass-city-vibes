@@ -35,6 +35,58 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Event Models
+class Event(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    description: str
+    date: str
+    time: str
+    location: str
+    price: Optional[str] = None
+    category: str
+    image: Optional[str] = None
+    capacity: Optional[str] = None
+    age_restriction: Optional[str] = None
+    organizer: str
+    ticket_url: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class EventCreate(BaseModel):
+    name: str
+    description: str
+    date: str
+    time: str
+    location: str
+    price: Optional[str] = None
+    category: str
+    image: Optional[str] = None
+    capacity: Optional[str] = None
+    age_restriction: Optional[str] = None
+    organizer: str
+    ticket_url: Optional[str] = None
+
+class EventUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    date: Optional[str] = None
+    time: Optional[str] = None
+    location: Optional[str] = None
+    price: Optional[str] = None
+    category: Optional[str] = None
+    image: Optional[str] = None
+    capacity: Optional[str] = None
+    age_restriction: Optional[str] = None
+    organizer: Optional[str] = None
+    ticket_url: Optional[str] = None
+
+class EventFilter(BaseModel):
+    category: Optional[str] = None
+    location: Optional[str] = None
+    date: Optional[str] = None
+    price_range: Optional[str] = None
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
