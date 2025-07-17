@@ -6,7 +6,9 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   build: {
-    outDir: 'build'
+    // Place the build output in the repository root so platforms
+    // expecting a top-level `build` directory can find it.
+    outDir: '../build'
   },
   server: {
     port: 3000,
