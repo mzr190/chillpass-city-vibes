@@ -3,11 +3,48 @@ import Header from '../components/Header';
 import FilterSection from '../components/FilterSection';
 import EventCard from '../components/EventCard';
 import Footer from '../components/Footer';
-import { useEvents } from '../hooks/useEvents';
 
 const MejoresPanoramas = () => {
   const [filters, setFilters] = useState({});
-  const { data: events = [], isLoading, error } = useEvents();
+
+  const mejoresPanoramasEvents = [
+    {
+      id: 1,
+      name: "Concierto al aire libre en Parque O'Higgins",
+      time: "Sábado 15:00",
+      location: "Parque O'Higgins",
+      price: "$25.000",
+      category: "Música",
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 2,
+      name: "Festival gastronómico Las Condes",
+      time: "Domingo 12:00",
+      location: "Centro Las Condes",
+      price: "$15.000",
+      category: "Gastronomía",
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 3,
+      name: "Exposición de arte contemporáneo",
+      time: "Martes a Domingo 10:00-18:00",
+      location: "Museo Nacional de Bellas Artes",
+      price: "Gratis",
+      category: "Cultura",
+      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 4,
+      name: "Trekking Cerro San Cristóbal",
+      time: "Sábado 08:00",
+      location: "Cerro San Cristóbal",
+      price: "Gratis",
+      category: "Aire libre",
+      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    }
+  ];
 
   const handleFilterChange = (newFilters: any) => {
     setFilters(newFilters);
@@ -29,37 +66,13 @@ const MejoresPanoramas = () => {
         </div>
       </div>
 
-      {/* Events Grid */}
+      {/* Events Grid - Sin filtros */}
       <div className="max-w-7xl mx-auto px-4 py-12">
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden animate-pulse">
-                <div className="h-48 bg-gray-200"></div>
-                <div className="p-6">
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded mb-1"></div>
-                  <div className="h-3 bg-gray-200 rounded"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : error ? (
-          <div className="text-center py-8">
-            <p className="text-red-600 text-lg mb-4">Error cargando eventos</p>
-            <p className="text-gray-500">{error.message}</p>
-          </div>
-        ) : events.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {events.map((event) => (
-              <EventCard key={event.id} event={event} featured />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-8">
-            <p className="text-gray-500 text-lg">No hay eventos disponibles</p>
-          </div>
-        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {mejoresPanoramasEvents.map((event) => (
+            <EventCard key={event.id} event={event} featured />
+          ))}
+        </div>
       </div>
 
       <Footer />

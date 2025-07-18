@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart } from 'lucide-react';
-import { Event } from '../services/eventService';
-import { useEventFavorites } from '../hooks/useEvents';
 
 interface EventCardProps {
-  event: Event;
+  event: {
+    id: number;
+    name: string;
+    time: string;
+    location: string;
+    price?: string;
+    image?: string;
+    category: string;
+  };
   featured?: boolean;
   compact?: boolean;
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event, featured = false, compact = false }) => {
-  const { toggleFavorite, isFavorite } = useEventFavorites();
-  const isLiked = isFavorite(event.id);
+  const [isLiked, setIsLiked] = useState(false);
 
   const getCategoryImage = (category: string) => {
     const images = {
@@ -28,7 +33,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, featured = false, compact 
   const handleLikeClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    toggleFavorite(event.id);
+    setIsLiked(!isLiked);
+    console.log(`Event ${event.id} ${!isLiked ? 'liked' : 'unliked'}`);
   };
 
   if (compact) {
@@ -129,9 +135,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, featured = false, compact 
             <button 
               onClick={(e) => {
                 e.preventDefault();
-                if (event.ticket_url) {
-                  window.open(event.ticket_url, '_blank');
-                }
+                console.log('Redirecting to ticket purchase');
               }}
               className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"
             >

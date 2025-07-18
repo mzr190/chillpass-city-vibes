@@ -7,11 +7,10 @@ import MapSection from '../components/MapSection';
 import RecommendedEvents from '../components/RecommendedEvents';
 import FeaturedCategoriesGrid from '../components/FeaturedCategoriesGrid';
 import Footer from '../components/Footer';
-import { useSearchEvents } from '../hooks/useEvents';
 
 const Index = () => {
   const [filters, setFilters] = useState({});
-  const { search } = useSearchEvents();
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleFilterChange = (newFilters: any) => {
     setFilters(newFilters);
@@ -19,7 +18,7 @@ const Index = () => {
   };
 
   const handleSearch = (query: string) => {
-    search(query);
+    setSearchQuery(query);
     console.log('Búsqueda realizada:', query);
   };
 
