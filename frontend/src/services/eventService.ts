@@ -36,7 +36,9 @@ class EventService {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = `${API_BASE_URL}/api`;
+    this.baseUrl = API_BASE_URL.endsWith('/api')
+      ? API_BASE_URL
+      : `${API_BASE_URL}/api`;
   }
 
   async getAllEvents(filters?: EventFilters): Promise<Event[]> {
