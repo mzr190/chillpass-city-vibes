@@ -337,6 +337,18 @@ frontend:
         agent: "main"
         comment: "Updated MejoresPanoramas page to use real API data with useEvents hook. Added loading states, error handling, and displays all events with featured styling."
 
+  - task: "Root Build Script"
+    implemented: true
+    working: true
+    file: "/app/package.json"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added root package.json with scripts to run frontend build and dev commands. Updated vite config to output to top-level build directory."
+
 metadata:
   created_by: "main_agent"
   version: "2.0"
