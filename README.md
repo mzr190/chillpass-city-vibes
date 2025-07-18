@@ -21,8 +21,8 @@ site locally you can run a lightweight API that serves sample event data.
 
 ## Running the frontend
 
-1. Ensure `frontend/.env` points to the local API (already configured by
-   default).
+1. Ensure `frontend/.env` contains `VITE_BACKEND_URL=http://localhost:8000`
+   (already configured by default).
 2. Install dependencies and start the development server:
 
    ```bash

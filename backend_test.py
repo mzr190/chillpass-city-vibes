@@ -12,9 +12,9 @@ env_path = Path(__file__).resolve().parent / 'frontend' / '.env'
 load_dotenv(env_path)
 
 # Get the backend URL from environment variables
-BACKEND_URL = os.environ.get('REACT_APP_BACKEND_URL')
+BACKEND_URL = os.environ.get('VITE_BACKEND_URL') or os.environ.get('REACT_APP_BACKEND_URL')
 if not BACKEND_URL:
-    print("Error: REACT_APP_BACKEND_URL not found in environment variables")
+    print("Error: VITE_BACKEND_URL (or REACT_APP_BACKEND_URL) not found in environment variables")
     sys.exit(1)
 
 # Ensure the URL ends with /api
