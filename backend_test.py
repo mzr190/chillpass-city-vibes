@@ -7,7 +7,9 @@ from pathlib import Path
 import uuid
 
 # Load environment variables from frontend/.env
-load_dotenv(Path('/app/frontend/.env'))
+# Use a path relative to this script so it works in different environments
+env_path = Path(__file__).resolve().parent / 'frontend' / '.env'
+load_dotenv(env_path)
 
 # Get the backend URL from environment variables
 BACKEND_URL = os.environ.get('REACT_APP_BACKEND_URL')
